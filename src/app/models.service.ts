@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Ad } from './anuncio';
- 
+import { Ad } from './ad';
+
 @Injectable({
   providedIn: 'root'
 })

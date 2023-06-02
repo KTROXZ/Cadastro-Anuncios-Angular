@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Ad } from '../ad.model';
-import { AdService } from '../ad.service'; 
+import { Ad } from '../ad';
+import { AdService } from '../ad.service';
 
 @Component({
   selector: 'app-home',

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Ad } from '../ad.model';
+import { Component, Input, OnInit } from '@angular/core';
+import { Ad } from '../ad';
 import { AdService } from '../ad.service';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-admin',
@@ -9,49 +10,97 @@ import { Router } from '@angular/router';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
+  formGroupAdmin: FormGroup;
   ads: Ad[] = [];
-  selectedAd: Ad = new Ad();
   isEditing: boolean = false;
+  submitted: boolean = false;
 
-  constructor(private adService: AdService, private router: Router) { }
-
+  constructor(private adService: AdService, private formBuilder: FormBuilder, private router: Router) {
+    this.formGroupAdmin = formBuilder.group({
+      id: [''],
+      title: ['', Validators.required],
+      description: ['', [Validators.required]],
+      price: ['', [Validators.required]],
+      expirationDate: ['', Validators.required],
+      image: ['', Validators.required],
+      status: [''],
+    });
+  }
   ngOnInit(): void {
     this.loadAds();
   }
 
-  loadAds(): void {
-    this.adService.getAllAds().subscribe((ads) => {
-      this.ads = ads;
+  loadAds() {
+    this.adService.getAllAds().subscribe({
+      next: (data) => (this.ads = data),
     });
   }
 
-  editAd(ad: Ad): void {
-    this.router.navigate(['/edit', ad.id]);
+  save() {
+    this.submitted = true;
+    if(this.formGroupAdmin.valid){
+      if (this.isEditing) {
+        this.adService.update(this.formGroupAdmin.value).subscribe({
+          next: () => {
+            this.loadAds();
+            this.formGroupAdmin.reset();
+            this.isEditing = false;
+            this.submitted = false;
+          }
+        });
+      } else {
+        this.adService.save(this.formGroupAdmin.value).subscribe({
+          next: data => {
+            this.ads.push(data)
+            this.formGroupAdmin.reset();
+            this.submitted = false;
+          }
+         });
+      }
+    }
   }
 
-  deleteAd(ad: Ad): void {
-    this.adService.deleteAd(ad.id!).subscribe(() => {
+  clean(){
+    this.formGroupAdmin.reset();
+    this.isEditing = false;
+    this.submitted = false;
+  }
+
+  edit(ad: Ad) {
+    this.formGroupAdmin.patchValue(ad);
+    this.isEditing = true;
+  }
+
+  remove(ad: Ad) {
+    this.adService.delete(ad).subscribe({
+      next: () => this.loadAds(),
+    });
+  }
+
+  toggleCompleted(ad: Ad){
+    ad.completed = !ad.completed;
+    this.adService.update(ad).subscribe(() => {
       this.loadAds();
     });
   }
 
-  saveAd(): void {
-    if (this.selectedAd.id) {
-      this.adService.updateAd(this.selectedAd).subscribe(() => {
-        this.isEditing = false;
-        this.selectedAd = new Ad();
-        this.loadAds();
-      });
-    } else {
-      this.adService.createAd(this.selectedAd).subscribe(() => {
-        this.selectedAd = new Ad();
-        this.loadAds();
-      });
-    }
+  get title() : any {
+    return this.formGroupAdmin.get("title");
   }
 
-  cancelEdit(): void {
-    this.isEditing = false;
-    this.selectedAd = new Ad();
+  get description() : any {
+    return this.formGroupAdmin.get("description");
+  }
+
+  get price() : any {
+    return this.formGroupAdmin.get("price");
+  }
+
+  get image() : any {
+    return this.formGroupAdmin.get("image");
+  }
+
+  get status() : any {
+    return this.formGroupAdmin.get("status")
   }
 }
