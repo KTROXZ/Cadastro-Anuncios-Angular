@@ -1,0 +1,29 @@
+<app-ad-form [ad]="selectedAd" (saveAd)="saveAd()" (cancelEdit)="cancelEdit()"></app-ad-form>
+<div class="container">
+  <h2>Administração de Anúncios</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Título</th>
+        <th>Descrição</th>
+        <th>Preço</th>
+        <th>Status</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ad of ads">
+        <td>{{ ad.id }}</td>
+        <td>{{ ad.title }}</td>
+        <td>{{ ad.description }}</td>
+        <td>R$ {{ ad.price }}</td>
+        <td>{{ ad.status }}</td>
+        <td>
+          <button class="btn btn-sm btn-primary" (click)="editAd(ad)">Editar</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteAd(ad)">Excluir</button>
+        </td>
+      </tr>        
+    </tbody>
+  </table>
+</div>

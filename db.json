@@ -1,0 +1,31 @@
+{
+  "ads": [
+    {
+      "id": 1,
+      "title": "Carro A",
+      "description": "Descrição do Carro A",
+      "price": 20000,
+      "expirationDate": "2023-06-30",
+      "image": "https://example.com/carro_a.jpg",
+      "status": "ativo"
+    },
+    {
+      "id": 2,
+      "title": "Carro B",
+      "description": "Descrição do Carro B",
+      "price": 15000,
+      "expirationDate": "2023-07-15",
+      "image": "https://example.com/carro_b.jpg",
+      "status": "ativo"
+    },
+    {
+      "id": 3,
+      "title": "Carro C",
+      "description": "Descrição do Carro C",
+      "price": 18000,
+      "expirationDate": "2023-06-25",
+      "image": "https://example.com/carro_c.jpg",
+      "status": "ativo"
+    }
+  ]
+}
