@@ -3,8 +3,8 @@ export interface Ad {
     title: string;
     description: string;
     price: string;
-    expirationDate: Date;
+    expirationDate: string;
     image: string;
-    status: string;
+    status: boolean;
     completed: boolean;
   }

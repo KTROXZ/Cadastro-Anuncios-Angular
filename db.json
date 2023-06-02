@@ -1,3 +1,58 @@
 {
-  "ads": []
+  "ads": [
+    {
+      "id": 1,
+      "title": "CHANA",
+      "description": "Cargo 1.0 8V 53cv (Pick-Up)",
+      "price": "120000",
+      "expirationDate": "2023-12-12",
+      "image": "https://img0.icarros.com/dbimg/galeriaimgmodelo/2/72_1.jpg",
+      "status": true
+    },
+    {
+      "id": 2,
+      "title": "Matra",
+      "description": "Pick-Up 4x2 Curto/Longo 2.5 TDI Diesel",
+      "price": "90000",
+      "expirationDate": "2023-01-30",
+      "image": "https://www.lexicarbrasil.com.br/wp-content/uploads/2015/03/matra-a-capa.jpg",
+      "status": true
+    },
+    {
+      "id": 3,
+      "title": "JPX",
+      "description": "Jipe Montez 4x4 CD Teto de Lona Diesel",
+      "price": "75000",
+      "expirationDate": "2031-01-22",
+      "image": "https://http2.mlstatic.com/D_779611-MLB54466121028_032023-O.jpg",
+      "status": true
+    },
+    {
+      "id": 4,
+      "title": "GM - Chevrolet",
+      "description": "S10 Pick-Up Std 2.8 4x2 CD TB Int.Dies.",
+      "price": "240000",
+      "expirationDate": "2024-05-04",
+      "image": "https://cdn.carrosp.com.br/img/3/full/chevrolet-s10-2002-itapolis-864fa60ac36e82acee3380451bc656f4.jpg",
+      "status": true
+    },
+    {
+      "id": 5,
+      "title": "Plymouth",
+      "description": "Sundance 2.5",
+      "price": "500000",
+      "expirationDate": "2045-07-09",
+      "image": "https://photos.carspecs.us/98da758aadcf3e0542f0480ec35c7ccef9224521-2000.jpg",
+      "status": true
+    },
+    {
+      "id": 6,
+      "title": "Jeep",
+      "description": "Renegade Longitude 1.8 4x2 Flex 16V Aut.",
+      "price": "700000",
+      "expirationDate": "2024-06-04",
+      "image": "https://www.meucarro360.com.br/web-files/uploads/anuncios/231/7477/galeria/whatsapp-image-2022-05-24-at-155058.jpeg",
+      "status": true
+    }
+  ]
 }

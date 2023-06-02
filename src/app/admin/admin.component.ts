@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Ad } from '../ad';
 import { AdService } from '../ad.service';
 import { Router } from '@angular/router';
@@ -14,6 +14,7 @@ export class AdminComponent implements OnInit {
   ads: Ad[] = [];
   isEditing: boolean = false;
   submitted: boolean = false;
+  statusOption: string[] = ['Ativo', 'Desativo'];
 
   constructor(private adService: AdService, private formBuilder: FormBuilder, private router: Router) {
     this.formGroupAdmin = formBuilder.group({
@@ -23,7 +24,7 @@ export class AdminComponent implements OnInit {
       price: ['', [Validators.required]],
       expirationDate: ['', Validators.required],
       image: ['', Validators.required],
-      status: [''],
+      status: [false],
     });
   }
   ngOnInit(): void {
@@ -31,7 +32,7 @@ export class AdminComponent implements OnInit {
   }
 
   loadAds() {
-    this.adService.getAllAds().subscribe({
+    this.adService.getAds().subscribe({
       next: (data) => (this.ads = data),
     });
   }
@@ -77,13 +78,6 @@ export class AdminComponent implements OnInit {
     });
   }
 
-  toggleCompleted(ad: Ad){
-    ad.completed = !ad.completed;
-    this.adService.update(ad).subscribe(() => {
-      this.loadAds();
-    });
-  }
-
   get title() : any {
     return this.formGroupAdmin.get("title");
   }
@@ -96,11 +90,11 @@ export class AdminComponent implements OnInit {
     return this.formGroupAdmin.get("price");
   }
 
-  get image() : any {
-    return this.formGroupAdmin.get("image");
+  get data() : any {
+    return this.formGroupAdmin.get("expirationDate");
   }
 
-  get status() : any {
-    return this.formGroupAdmin.get("status")
+  get image() : any {
+    return this.formGroupAdmin.get("image");
   }
 }

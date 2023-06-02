@@ -7,7 +7,7 @@
           <label for="title" class="form-label">Título:</label>
           <input type="text" formControlName="title" class="form-control" id="title" placeholder="Título">
           <div *ngIf="submitted && title.invalid">
-            <small class="text-danger">Nome inválido!</small>
+            <small class="text-danger">Título inválido!</small>
           </div>
         </div>
         <div class="mb-3">
@@ -25,18 +25,24 @@
           </div>
         </div>
         <div class="mb-3">
+          <label for="expirationDate" class="form-label">Data de Validade:</label>
+          <input type="date" formControlName="expirationDate" class="form-control" id="expirationDate" placeholder="Data de Validade">
+          <div *ngIf="submitted && data.invalid">
+            <small class="text-danger">Data Inválida!</small>
+          </div>
+        </div>
+        <div class="mb-3">
           <label for="image" class="form-label">Imagem (URL)</label>
           <input type="text" formControlName="image" class="form-control" id="image" placeholder="Imagem">
           <div *ngIf="submitted && image.invalid">
             <small class="text-danger">Endereço de Imagem inválida!</small>
           </div>
         </div>
-        <div class="mb-3">
-          <label for="status" class="form-label">Status</label>
-          <select class="form-control" id="status" name="status">
-            <option value="ativo">Ativo</option>
-            <option value="desativo">Desativo</option>
-          </select>
+        <div class="d-flex gap-2 mb-3">
+          <label for="status" class="form-check-label">Status Ativo ou Desativo?</label>
+          <div class="form-check">
+            <input type="checkbox" formControlName="status" class="form-check-input" id="status">
+          </div>
         </div>
         <div class="mb-3 d-flex justify-content-end">
           <button class="btn btn-primary me-1" (click)="save()">Salvar</button>
@@ -49,29 +55,25 @@
   <table class="table table-light table-striped text-center">
     <thead>
       <tr>
-        <th scope="col">#</th>
+        <th scope="col">ID</th>
         <th scope="col">Título</th>
         <th scope="col">Descrição</th>
         <th scope="col">Preço</th>
         <th scope="col">Expiração de Validade</th>
         <th scope="col">Imagem (URL)</th>
         <th scope="col">Status</th>
-        <th scope="col">Concluído</th>
         <th scope="col">Opções</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let ad of ads" [ngClass]="{'completed': ad.completed}">
+      <tr *ngFor="let ad of ads">
         <th scope="row">{{ad.id}}</th>
-        <td [ngClass]="{'completed':  ad.completed}">{{ ad.title }}</td>
-        <td [ngClass]="{'completed': ad.completed}">{{ ad.description }}</td>
-        <td [ngClass]="{'completed': ad.completed}">{{ ad.price }}</td>
-        <td [ngClass]="{'completed': ad.completed}">{{ ad.expirationDate }}</td>
-        <td [ngClass]="{'completed': ad.completed}"><img src='{{ad.image}}' style="width: 100px;" alt=""></td>
-        <td [ngClass]="{'completed': ad.completed}">{{ ad.status }}</td>
-        <td>
-          <input type="checkbox" [checked]="ad.completed" (change)="toggleCompleted(ad)">
-        </td>
+        <td>{{ ad.title }}</td>
+        <td>{{ ad.description }}</td>
+        <td>{{ ad.price | currency: 'BRL': 'symbol': '1.2-2' }}</td>
+        <td>{{ ad.expirationDate | date: 'dd/MM/yyyy' }}</td>
+        <td><img src='{{ad.image}}' style="width: 100px;" alt=""></td>
+        <td>{{ ad.status ? 'Ativo' : 'Desativo' }}</td>
         <td>
           <button class="btn btn-primary me-1" (click)="edit(ad)">Editar</button>
           <button class="btn btn-danger" (click)="remove(ad)">Excluir</button>

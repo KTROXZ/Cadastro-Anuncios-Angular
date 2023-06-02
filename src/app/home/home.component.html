@@ -1,16 +1,22 @@
 <div class="container">
-    <h2>Lista de Anúncios</h2>
-    <div class="row">
-      <div class="col-md-4" *ngFor="let ad of ads">
-        <div class="card" style="width: 300x; height: 450px;">
+  <h2>Lista de Anúncios</h2>
+  <div class="row">
+    <div class="col-md-4 mb-4" *ngFor="let ad of ads">
+      <div *ngIf="ad.status">
+        <div class="card" style="width: 300x; height: 450px">
           <div class="card-body">
-            <img class="card-img" src="{{ad.image}}" style="width: 380px; height: 270px;">
+            <img
+              class="card-img"
+              src="{{ ad.image }}"
+              style="width: 380px; height: 280px"
+            />
             <h5 class="card-title">{{ ad.title }}</h5>
-            <p class="card-text">{{ ad.description }}</p>
-            <p class="card-text">Preço: R$ {{ ad.price }}</p>
-            <p class="card-text">Status: {{ ad.status }}</p>
+            <p class="card-text" style="font-weight: 600;">{{ ad.description }}</p>
+            <p class="card-text"> <span style="font-weight: 600;">Preço:</span> {{ ad.price | currency: 'BRL': 'symbol': '1.2-2' }}</p>
+            <small class="card-text" style=" font-size: 13px;font-style: italic; font-weight: 600;">Valido até {{ad.expirationDate | date: 'dd/MM/yyyy'}}</small>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>

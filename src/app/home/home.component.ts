@@ -16,9 +16,9 @@ export class HomeComponent implements OnInit {
     this.loadAds();
   }
 
-  loadAds(): void {
-    this.adService.getActiveAds().subscribe((ads) => {
-      this.ads = ads;
+  loadAds() {
+    this.adService.getAds().subscribe({
+      next: (data) => (this.ads = data),
     });
   }
 }
